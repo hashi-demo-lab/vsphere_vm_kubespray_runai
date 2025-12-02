@@ -1,0 +1,44 @@
+# Git files
+.git/
+.gitignore
+
+# Documentation
+*.md
+docs/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# CI/CD files
+.github/
+.gitlab-ci.yml
+.travis.yml
+
+# Specs and planning
+specs/
+.specify/
+.claude/
+
+# Test files
+test/
+tests/
+*_test.go
+
+# Backup files
+*.backup
+*.bak
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+tmp/
+
+# OS files
+.DS_Store
+Thumbs.db
