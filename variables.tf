@@ -122,9 +122,9 @@ variable "cluster_name" {
 }
 
 variable "kubernetes_version" {
-  description = "Target Kubernetes version for deployment (determined by Kubespray compatibility) (FR-009)"
+  description = "Target Kubernetes version for deployment. Must match Kubespray version compatibility - v2.24.0 supports up to v1.28.x (FR-009)"
   type        = string
-  default     = "v1.28.5"
+  default     = "v1.28.6"
 
   validation {
     condition     = can(regex("^v[0-9]+\\.[0-9]+\\.[0-9]+$", var.kubernetes_version))
@@ -181,7 +181,35 @@ variable "kubespray_playbook_path" {
 }
 
 variable "kubespray_version" {
-  description = "Kubespray release version or Git tag (FR-011)"
+  description = "Kubespray release version or Git tag (FR-011). v2.24.0 supports K8s 1.28.x and requires Python 3.9+"
   type        = string
   default     = "v2.24.0"
+}
+
+# =============================================================================
+# Ansible Execution Control
+# =============================================================================
+
+variable "enable_ansible" {
+  description = "Enable SSH connectivity validation to VMs. Set to true to verify VMs are accessible."
+  type        = bool
+  default     = true
+}
+
+variable "enable_ansible_playbook" {
+  description = "Enable Ansible playbook execution for Kubespray deployment. Requires ansible-playbook on execution agent. Set to false when using HCP Terraform agents without Ansible installed."
+  type        = bool
+  default     = true
+}
+
+variable "enable_kubespray_deployment" {
+  description = "Enable Kubespray deployment via remote provisioner on control plane VM. This installs Ansible on the control plane and runs Kubespray from there."
+  type        = bool
+  default     = true
+}
+
+variable "ansible_version" {
+  description = "Ansible version to install on control plane for Kubespray execution."
+  type        = string
+  default     = "8.7.0"
 }

@@ -28,6 +28,7 @@ module "k8s_control_plane_01" {
   # Optional inputs
   folder_path        = var.vsphere_folder
   linux_distribution = "ubuntu"
+  custom_text        = local.ssh_authorized_keys_userdata
 }
 
 # =============================================================================
@@ -53,6 +54,7 @@ module "k8s_worker_01" {
   # Optional inputs
   folder_path        = var.vsphere_folder
   linux_distribution = "ubuntu"
+  custom_text        = local.ssh_authorized_keys_userdata
 }
 
 # =============================================================================
@@ -78,4 +80,6 @@ module "k8s_worker_02" {
   # Optional inputs
   folder_path        = var.vsphere_folder
   linux_distribution = "ubuntu"
+  custom_text        = local.ssh_authorized_keys_userdata
 }
+

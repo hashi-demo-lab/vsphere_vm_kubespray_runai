@@ -109,3 +109,26 @@ output "ssh_connection_strings" {
     worker_02     = "ssh ${var.ssh_user}@${module.k8s_worker_02.ip_address}"
   }
 }
+
+# =============================================================================
+# Kubeconfig Outputs for Platform Configuration (Remote State)
+# These outputs are consumed by the platform Terraform configuration
+# =============================================================================
+
+output "kubeconfig_ca_certificate" {
+  description = "Base64-encoded Kubernetes cluster CA certificate"
+  value       = var.enable_kubespray_deployment ? data.external.fetch_kubeconfig[0].result.kubeconfig_ca_certificate : ""
+  sensitive   = true
+}
+
+output "kubeconfig_client_certificate" {
+  description = "Base64-encoded Kubernetes client certificate"
+  value       = var.enable_kubespray_deployment ? data.external.fetch_kubeconfig[0].result.kubeconfig_client_certificate : ""
+  sensitive   = true
+}
+
+output "kubeconfig_client_key" {
+  description = "Base64-encoded Kubernetes client private key"
+  value       = var.enable_kubespray_deployment ? data.external.fetch_kubeconfig[0].result.kubeconfig_client_key : ""
+  sensitive   = true
+}
