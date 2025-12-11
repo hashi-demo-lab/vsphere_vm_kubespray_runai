@@ -1,7 +1,6 @@
 # NVIDIA GPU Operator Configuration
 # Feature: Run:AI Platform Deployment
 # Spec: /workspace/specs/002-runai-deployment/plan.md
-# Dependency: Prometheus (for DCGM Exporter ServiceMonitor)
 
 # =============================================================================
 # NVIDIA GPU Operator
@@ -76,7 +75,6 @@ resource "helm_release" "gpu_operator" {
 
   # ==========================================================================
   # DCGM Exporter for GPU Metrics
-  # Integrates with Prometheus
   # ==========================================================================
 
   set {
@@ -84,10 +82,9 @@ resource "helm_release" "gpu_operator" {
     value = "true"
   }
 
-  # ServiceMonitor for Prometheus integration
   set {
     name  = "dcgmExporter.serviceMonitor.enabled"
-    value = tostring(var.enable_prometheus)
+    value = "false"
   }
 
   # ==========================================================================
@@ -128,7 +125,6 @@ resource "helm_release" "gpu_operator" {
   }
 
   depends_on = [
-    kubernetes_namespace.gpu_operator,
-    helm_release.prometheus_stack
+    kubernetes_namespace.gpu_operator
   ]
 }

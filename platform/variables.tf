@@ -109,17 +109,6 @@ variable "ingress_nginx_version" {
   default     = "4.9.0"
 }
 
-variable "enable_prometheus" {
-  description = "Enable Prometheus monitoring stack deployment"
-  type        = bool
-  default     = true
-}
-
-variable "prometheus_stack_version" {
-  description = "kube-prometheus-stack Helm chart version"
-  type        = string
-  default     = "56.6.0"
-}
 
 variable "enable_local_storage" {
   description = "Enable local-path-provisioner for default StorageClass"

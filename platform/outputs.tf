@@ -88,16 +88,6 @@ output "ingress_nginx_https_port" {
   value       = var.enable_ingress_nginx ? "30443" : null
 }
 
-output "prometheus_enabled" {
-  description = "Whether Prometheus stack is enabled"
-  value       = var.enable_prometheus
-}
-
-output "prometheus_namespace" {
-  description = "Kubernetes namespace for Prometheus"
-  value       = var.enable_prometheus ? kubernetes_namespace.monitoring[0].metadata[0].name : null
-}
-
 output "local_storage_enabled" {
   description = "Whether local-path-provisioner is enabled"
   value       = var.enable_local_storage
@@ -110,9 +100,4 @@ output "local_storage_enabled" {
 output "runai_access_url" {
   description = "URL to access Run:AI (via NodePort)"
   value       = var.enable_runai ? "https://${local.control_plane_ip}:30443" : null
-}
-
-output "grafana_access_url" {
-  description = "URL to access Grafana (via port-forward)"
-  value       = var.enable_prometheus ? "kubectl port-forward -n monitoring svc/prometheus-grafana 3000:80" : null
 }

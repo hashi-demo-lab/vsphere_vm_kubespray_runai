@@ -193,7 +193,6 @@ resource "helm_release" "runai_cluster" {
     kubernetes_namespace.runai,
     kubernetes_secret.runai_tls,
     helm_release.gpu_operator,
-    helm_release.prometheus_stack,
     helm_release.ingress_nginx
   ]
 }
